@@ -1,6 +1,5 @@
 {
     "Alt-/": "lua:comment.comment",
     "CtrlUnderscore": "lua:comment.comment",
-    "Ctrlj": "command:jumptag",
-    "F4": "command:jumptag"
+    "Ctrlj": "command:jumptag"
 }
