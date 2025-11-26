@@ -1,5 +1,10 @@
 {
     "Alt-/": "lua:comment.comment",
     "CtrlUnderscore": "lua:comment.comment",
-    "Ctrlj": "command:jumptag"
+    "Ctrlj": "command:jumptag",
+    "Alt-w": "MoveLinesUp",
+    "Alt-s": "MoveLinesDown",
+    "Alt-[": "HalfPageUp",
+    "Alt-]": "HalfPageDown",
+    "Alt-z": "command: togglelocal softwrap"
 }

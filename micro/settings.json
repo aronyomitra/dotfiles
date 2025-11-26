@@ -1,3 +1,13 @@
 {
-    "colorscheme": "arrow1"
+    "clipboard": "internal",
+    "colorscheme": "arrow1",
+    "diffgutter": true,
+    "divreverse": false,
+    "hlsearch": true,
+    "infobar": false,
+    "literate": false,
+    "scrollbar": true,
+    "statusformatr": "Branch: $(status.branch)",
+    "wordwrap": true,
+    "xterm": true
 }
