@@ -1,0 +1,21 @@
+[include]
+    path = ~/.config/delta/themes.gitconfig
+
+[delta]
+    dark = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = OneHalfDark
+    features = arctic-fox
+
+    hyperlinks = true
+    hyperlinks-file-link-format = "file://{path}:{line}"
+    keep-plus-minus-markers = false
+    relative-paths = true
+
+    file-style = bold yellow
+    file-decoration-style = none
+    hunk-header-style = file line-number syntax bold
+    hunk-header-decoration-style = blue ul
+
+    tabs = false
