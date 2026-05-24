@@ -1,0 +1,71 @@
+gui:
+  expandFocusedSidePanel: true
+
+  theme:
+    activeBorderColor:
+      - "#61afef" # OneDark blue
+      - bold
+    inactiveBorderColor:
+      - "#5c6370" # muted grey
+    optionsTextColor:
+      - "#56b6c2" # cyan
+    selectedLineBgColor:
+      - "#2c313c" # subtle slate highlight
+    cherryPickedCommitBgColor:
+      - "#3e4452" # deeper muted bg
+    cherryPickedCommitFgColor:
+      - "#98c379" # green
+    unstagedChangesColor:
+      - "#e06c75" # red
+    defaultFgColor:
+      - "#abb2bf" # main foreground
+  authorColors:
+    "*": "#c678dd" # purple for authors
+  branchColorPatterns:
+    "^main$": "#61afef"
+    "^master$": "#61afef"
+    "^dev(elop)?$": "#98c379"
+    "^staging$": "#e5c07b"
+    "^release/": "#d19a66"
+    "^feature/": "#c678dd"
+    "^hotfix/": "#e06c75"
+    "^bugfix/": "#e06c75"
+    "^chore/": "#56b6c2"
+
+  nerdFontsVersion: "3"
+  showRandomTip: false
+  showBottomLine: false
+  showCommandLog: false
+  showFileTree: false
+  scrollHeight: 4
+  scrollPastBottom: true
+  border: rounded
+  mouseEvents: false
+
+git:
+  pagers:
+    - pager: "delta --paging=never --config ~/.config/delta/lazygit-side.gitconfig"
+      colorArg: always
+    - pager: "delta --paging=never --config ~/.config/delta/lazygit-straight.gitconfig"
+      colorArg: always
+    - pager: "cat"
+      colorArg: always
+  autoFetch: true
+  autoRefresh: true
+  parseEmoji: true
+  paging:
+    colorArg: always
+
+  refresher:
+    refreshInterval: 10
+    fetchInterval: 60
+
+  update:
+    method: never
+
+  os:
+    editPreset: "nvim"
+
+keybinding:
+  universal:
+    return: '<c-g>'
