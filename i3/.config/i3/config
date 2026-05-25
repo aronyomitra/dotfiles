@@ -13,15 +13,19 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 11
+font pango:FiraCode Nerd Font Mono 11
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 11
+# font pango:DejaVu Sans Mono 11
+font pango:FiraCode Nerd Font Mono 11
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
+
+# Automatically detect dual monitors and apply profile
+exec_always --no-startup-id ~/.screenlayout/dual_monitor.sh
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -33,6 +37,9 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy -g -p
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+
+# PolicyKit Gnome Authentication Agent (Needed for Apps like Steam)
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -49,7 +56,9 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+# bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id rio
+# bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+q kill
@@ -65,10 +74,10 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -display-drun "⮕"
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -77,10 +86,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -89,7 +98,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+c split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -116,52 +125,64 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 " 1 "
+set $ws2 " 2 "
+set $ws3 " 3 "
+set $ws4 " 4 "
+set $ws5 " 5 "
+set $ws6 " 6 "
+set $ws7 " 7 "
+set $ws8 " 8 "
+set $ws9 " 9 "
+set $ws10 " 10 "
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace AND STAY ON CURRENT WORKSPACE
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # move focused container to workspace AND GO TO THAT WORKSPACE
-bindsym $mod+Ctrl+2 move container to workspace number $ws1; workspace number $ws1
-bindsym $mod+Ctrl+1 move container to workspace number $ws1; workspace number $ws2 
-bindsym $mod+Ctrl+3 move container to workspace number $ws3; workspace number $ws3
-bindsym $mod+Ctrl+4 move container to workspace number $ws4; workspace number $ws4
-bindsym $mod+Ctrl+5 move container to workspace number $ws5; workspace number $ws5
-bindsym $mod+Ctrl+6 move container to workspace number $ws6; workspace number $ws6
-bindsym $mod+Ctrl+7 move container to workspace number $ws7; workspace number $ws7
-bindsym $mod+Ctrl+8 move container to workspace number $ws8; workspace number $ws8
-bindsym $mod+Ctrl+9 move container to workspace number $ws9; workspace number $ws9
-bindsym $mod+Ctrl+0 move container to workspace number $ws10; workspace number $ws10
+bindsym $mod+Ctrl+1 move container to workspace $ws1; workspace $ws1 
+bindsym $mod+Ctrl+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9; workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace $ws10; workspace $ws10
+
+# Monitor / output navigation
+bindsym $mod+comma        focus output left
+bindsym $mod+slash        focus output right
+bindsym $mod+semicolon    focus output up
+bindsym $mod+period       focus output down
+
+# Move current workspace across monitors
+bindsym $mod+Shift+comma        move workspace to output left
+bindsym $mod+Shift+slash        move workspace to output right
+bindsym $mod+Shift+semicolon    move workspace to output up
+bindsym $mod+Shift+period       move workspace to output down
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -178,10 +199,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 5 px or 5 ppt
@@ -208,7 +229,8 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks
-		font pango:FiraCode Nerd Font Mono 13
+		font: FiraCode Nerd Font 11
+		font pango:FiraCode Nerd Font Mono 11
 		
         colors {
         	background #0a0a0d
@@ -223,6 +245,7 @@ bar {
         }
 }
 
+
 exec_always --no-startup-id xinput set-prop "VEN_27C6:00 27C6:0D46 Touchpad" "libinput Natural Scrolling Enabled" 1
 bindsym $mod+Ctrl+l exec i3lock-fancy -g -p
 
@@ -236,9 +259,10 @@ gaps outer 5px
 
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 focus_follows_mouse yes
-default_border none
+default_border pixel 5
+# default_floating_border pixel 5
 
 bindsym XF86MonBrightnessUp   exec --no-startup-id brightnessctl set +10%
 bindsym XF86MonBrightnessDown exec --no-startup-id bash -c "[ $(brightnessctl get) -le $(( $(brightnessctl max) / 10 )) ] && brightnessctl set 1% || brightnessctl set 10%-"
@@ -254,3 +278,14 @@ bindsym $mod+Ctrl+s workspace next
 # Scratchpad bindings
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+
+# Color Variables
+
+# Window Borders
+# class                 border  background  text        indicator   child_border
+client.focused          #05051a #e30505     #ffffff     #3399ff     #ff0000
+client.unfocused        #05051a #ed5555     #ffffff     #4d0101     #4d0101
+client.focused_inactive #05051a #3636d6     #ffffff     #4d0101     #4d0101
+client.urgent           #05051a #3636d6     #ffffff     #ffffff     #ffffff
+
+title_align center
