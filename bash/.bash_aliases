@@ -6,11 +6,11 @@ alias delta1="delta --config ~/.config/delta/lazygit-side.gitconfig"
 
 # Search and change to a directory
 fcd() {
-  local dir
-  dir=$(find . -type d | fzf)
-  if [ -n "$dir" ]; then
-    cd "$dir"
-  fi
+    local dir
+    dir=$(fd --type d --hidden --exclude .git --exclude node_modules --exclude .venv "$@" . | fzf)
+    if [ -n "$dir" ]; then
+        cd "$dir"
+    fi
 }
 
 # Trigger GPG passphrase caching
@@ -41,7 +41,7 @@ eval "$(starship init bash)"
 
 export COLORTERM=truecolor
 
-# NVM setup
+# NVM (Node Version Manager) setup
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
