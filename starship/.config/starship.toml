@@ -2,7 +2,7 @@
 
 format = """
 $directory$git_branch$git_status$python$nodejs$java$lua$cmd_duration
-$character"""
+$jobs$character"""
 
 right_format = """
 $status$time
