@@ -1,7 +1,7 @@
 # ~/.config/starship.toml
 
 format = """
-$directory$git_branch$git_status$python$nodejs$java$lua$cmd_duration
+$hostname$directory$git_branch$git_status$python$nodejs$java$lua$cmd_duration
 $jobs$character"""
 
 right_format = """
@@ -99,8 +99,9 @@ format = "[$time]($style)"
 
 [hostname]
 ssh_only = true
-style = "green"
-format = "[@$hostname]($style) "
+style = "bold green"
+ssh_symbol = ""
+format = "[$ssh_symbol - $hostname]($style) "
 
 [username]
 disabled = true
