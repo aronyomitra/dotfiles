@@ -122,7 +122,7 @@ disabled = true
 disabled = true
 
 [rust]
-disabled = true
+disabled = false
 
 [golang]
 disabled = true
