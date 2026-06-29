@@ -123,6 +123,8 @@ disabled = true
 
 [rust]
 disabled = false
+symbol = "rust "
+format = "[$symbol]($style)"
 
 [golang]
 disabled = true
@@ -132,3 +134,13 @@ disabled = true
 
 [ruby]
 disabled = true
+
+[C]
+disabled = false
+symbol = "C "
+format = "[$symbol]($style)"
+
+[maven]
+disabled = false
+symbol = "mvn "
+format = "[$symbol]($style)"
