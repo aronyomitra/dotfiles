@@ -1,7 +1,7 @@
 # ~/.config/starship.toml
 
 format = """
-$hostname$directory$git_branch$git_status$python$nodejs$java$lua$cmd_duration
+$hostname$directory$git_branch$git_status$rust$c$cmake$cpp$kotlin$maven$meson$php$python$nodejs$java$lua$cmd_duration
 $jobs$character"""
 
 right_format = """
