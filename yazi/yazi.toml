@@ -1,0 +1,32 @@
+[mgr]
+ratio = [1, 3, 3]
+show_hidden = true
+show_symlink = true
+scrolloff = 5
+sort_dir_first = true
+mouse_events = ["click", "scroll", "drag"]
+
+[preview]
+tab_size = 1
+
+[opener]
+edit = [
+  { run = "vim %s", block = true, desc = "Edit (Vim)", for = "linux" },
+  { run = "nvim %s", block = true, desc = "Edit (Neovim)", for = "windows" },
+]
+reveal = [
+  { run = "explorerpp %d", block = false, desc = "Reveal", for = "windows" },
+  { run = 'thunar "%d"', block = false, desc = "Reveal (Thunar)", for = "linux" },
+]
+play = [
+  { run = "mpv %s", block = true, desc = "Play (mpv)" },
+]
+open = [
+  { run = 'start "" %s', desc = "Open (default)", for = "windows" },
+  { run = 'xdg-open "$@"', orphan = true, desc = "Open (default)", for = "linux" },
+]
+extract = [
+  { run = "7z x %s -o* -aou", block = false, desc = "Extract in Folder" },
+  { run = "ya pub extract --list %s", block = false, desc = "Extract Here" },
+]
+

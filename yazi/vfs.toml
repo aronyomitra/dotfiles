@@ -1,0 +1,6 @@
+[services.rasp1]
+type = "sftp"
+host = "raspberry-1"
+user = "arrow"
+port = 22
+key_file = "~/.ssh/id_ed25519"

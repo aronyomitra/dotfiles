@@ -1,0 +1,9 @@
+[mgr]
+append_keymap = [
+  { on = [ "g", "w" ], run = 'cd "/mnt/c/"', desc = "Go to Windows Partition" },
+  { on = [ "g", "s", "1" ], run = 'cd "sftp://rasp1"', desc = "Go to Raspberry1" },
+  { on = [ "g", "s", "2" ], run = 'cd "sftp://arrowbtw"', desc = "Go to ROG ARCH" },
+
+  { on = "!", run = 'shell "bash" --block', for = "unix", desc = "Open shell here" },
+  { on = "!", run = 'shell "pwsh" --block', for = "windows", desc = "Open shell here" },
+]
