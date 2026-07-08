@@ -1,3 +1,5 @@
+vim.loader.enable(true)
+
 vim.g.mapleader = " "
 
 -- Disable the default file explorer (netrw) because other file explorer plugins will be used in its place
@@ -26,6 +28,7 @@ vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move left in insert mode" })
 vim.keymap.set("n", "<C-a>", "gg0VG$", { desc = "Select All" })
 
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<C-x>", "<cmd>tabclose<cr>", { desc = "Close current tab" })
 
 -- Quick way to navigate a qflist
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<cr>")
@@ -173,6 +176,16 @@ vim.opt.foldlevelstart = 99
 local foldColumnValue = "1"
 vim.opt.foldcolumn = foldColumnValue
 
+-- Registering custom filetypes (eg. for treesitter parsing)
+vim.filetype.add({
+    extension = {
+        ftl = "ftl",
+        ftlh = "ftlh",
+    },
+})
+
+vim.treesitter.language.register("html", { "ftl", "ftlh" })
+
 -- Function to load secrets from a secret manager (eg. pass) and set them as environment variables, so that they can be loaded by plugins that need them (like CodeCompanion)
 -- If the GPG Agent has dropped the variable from the cache, stop trying - better to authorize the passphrase in a different terminal session than within neovim
 local function load_secret_env(env_name, pass_name)
@@ -207,7 +220,16 @@ local function load_secret_env(env_name, pass_name)
 end
 
 -- Colors --
-vim.cmd("colorscheme slate")
+--
+-- Some colorschemes I like:
+-- slate (the theme the colors in the config are based on)
+-- desert
+-- habamax
+-- quiet
+-- retrobox (Amazing!)
+-- sorbet
+-- unokai
+vim.cmd("colorschem slate")
 
 -- Increase contrast of line numbers
 vim.api.nvim_set_hl(0, "LineNrNC", { fg = "#8b949e" })
@@ -533,7 +555,7 @@ vim.api.nvim_create_autocmd("User", {
     callback = function()
         -- Load secrets after all plugins have loaded
         load_secret_env("OPENAI_API_KEY", "openai/api_key")
-        -- load_secret_env("ANTHROPIC_API_KEY", "anthropic/claude_code")
+        load_secret_env("ANTHROPIC_API_KEY", "anthropic/claude_code")
     end,
 })
 
@@ -737,7 +759,22 @@ require("lazy").setup({
     {
         "numToStr/Comment.nvim",
         event = "BufReadPre",
-        config = true,
+        config = function()
+            local comment = require("Comment")
+            local ft = require("Comment.ft")
+
+            ft.set("ftl", "<#-- %s -->")
+            ft.set("ftlh", "<#-- %s -->")
+
+            comment.setup({
+                pre_hook = function()
+                    local filetype = vim.bo.filetype
+                    if filetype == "ftl" or filetype == "ftlh" then
+                        return "<#-- %s -->"
+                    end
+                end,
+            })
+        end,
     },
 
     {
@@ -839,6 +876,21 @@ require("lazy").setup({
             local actions = require("telescope.actions")
 
             telescope.setup({
+                defaults = {
+                    preview = {
+                        treesitter = true,
+                    },
+                    buffer_previewer_maker = function(filepath, bufnr, opts)
+                        require("telescope.previewers").buffer_previewer_maker(filepath, bufnr, opts)
+
+                        if filepath:match("%.ftlh$") then
+                            vim.bo[bufnr].filetype = "ftlh"
+                        elseif filepath:match("%.ftl$") then
+                            vim.bo[bufnr].filetype = "ftl"
+                        end
+                    end,
+                },
+
                 extensions = {
                     fzf = {
                         fuzzy = true,
@@ -944,7 +996,9 @@ require("lazy").setup({
 
             lspconfig.basedpyright.setup({})
             lspconfig.vtsls.setup({})
-            lspconfig.html.setup({})
+            lspconfig.html.setup({
+                -- filetypes = { "html", "ftlh", "ftl" },
+            })
             lspconfig.cssls.setup({})
 
             lspconfig.emmet_language_server.setup({
@@ -1014,6 +1068,16 @@ require("lazy").setup({
                         ["p"] = "paste_from_clipboard",
                         ["."] = "toggle_hidden",
                         ["R"] = "refresh",
+                        ["Y"] = function(state)
+                            local node = state.tree:get_node()
+                            if not node or not node.path then
+                                return
+                            end
+
+                            local rel_path = vim.fn.fnamemodify(node.path, ":.")
+                            vim.fn.setreg("+", rel_path)
+                            vim.notify("Copied relative path: " .. rel_path)
+                        end,
                     },
                 },
 
@@ -1352,6 +1416,19 @@ require("lazy").setup({
 
                     -- Highlight hex colors using that actual color
                     hex_color = hipatterns.gen_highlighter.hex_color(),
+
+                    -- Highlight Freemarker comments in .ftl / .ftlh
+                    freemarker_comment = {
+                        pattern = function(buf_id)
+                            local ft = vim.bo[buf_id].filetype
+                            if ft ~= "ftl" and ft ~= "ftlh" then
+                                return nil
+                            end
+
+                            return "()<#%-%-.-%-%->()"
+                        end,
+                        group = "Comment",
+                    },
                 },
             })
         end,
