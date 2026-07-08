@@ -1,0 +1,12 @@
+user.name=Aronyo Mitra
+user.email=aronyomitra@gmail.com
+init.defaultbranch=main
+diff.tool=nvimdiff
+difftool.nvimdiff.cmd=nvim -d "$LOCAL" "$REMOTE"
+difftool.prompt=false
+core.editor=nvim
+merge.tool=nvimdiff
+merge.conflictstyle=zdiff3
+mergetool.nvimdiff.layout=LOCAL,BASE,REMOTE / MERGED
+mergetool.prompt=false
+mergetool.keepbackup=false
