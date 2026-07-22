@@ -2145,24 +2145,32 @@ require("lazy").setup({
                                 formatted_name = "02. GPT 5.4 Mini",
                                 opts = { can_reason = true, has_vision = true, has_function_calling = true },
                             },
-                            ["gpt-5.3-codex"] = {
-                                formatted_name = "03. GPT 5.3 Codex",
+                            ["gpt-5.6-luna"] = {
+                                formatted_name = "03. GPT 5.6 Luna",
                                 opts = { can_reason = true, has_vision = true, has_function_calling = true },
                             },
-                            ["gpt-5.4"] = {
-                                formatted_name = "04. GPT 5.4",
+                            ["gpt-5.3-codex"] = {
+                                formatted_name = "04. GPT 5.3 Codex",
+                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                            },
+                            ["gpt-5.6-terra"] = {
+                                formatted_name = "05. GPT 5.6 Terra",
+                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                            },
+                            ["gpt-5.6-sol"] = {
+                                formatted_name = "06. GPT 5.6 Sol",
                                 opts = { can_reason = true, has_vision = true, has_function_calling = true },
                             },
                             ["gpt-5.1-codex"] = {
-                                formatted_name = "05. GPT 5.1 Codex",
+                                formatted_name = "07. GPT 5.1 Codex",
                                 opts = { can_reason = true, has_vision = true, has_function_calling = true },
                             },
                             ["gpt-5"] = {
-                                formatted_name = "06. GPT 5",
+                                formatted_name = "08. GPT 5",
                                 opts = { can_reason = true, has_vision = true, has_function_calling = true },
                             },
                             ["gpt-5-mini"] = {
-                                formatted_name = "07. GPT 5 Mini",
+                                formatted_name = "09. GPT 5 Mini",
                                 opts = {
                                     can_reason = false,
                                     has_vision = false,
@@ -2170,7 +2178,7 @@ require("lazy").setup({
                                 },
                             },
                             ["gpt-5.4-pro"] = {
-                                formatted_name = "08. GPT 5.4 Pro",
+                                formatted_name = "10. GPT 5.4 Pro",
                                 opts = { can_reason = true, has_vision = true, has_function_calling = true },
                             },
                         }
