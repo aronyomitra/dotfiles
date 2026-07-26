@@ -556,6 +556,7 @@ vim.api.nvim_create_autocmd("User", {
         -- Load secrets after all plugins have loaded
         load_secret_env("OPENAI_API_KEY", "openai/api_key")
         load_secret_env("ANTHROPIC_API_KEY", "anthropic/claude_code")
+        load_secret_env("OPENROUTER_API_KEY", "openrouter/api_key")
     end,
 })
 
@@ -2138,48 +2139,48 @@ require("lazy").setup({
                                 opts = {
                                     can_reason = false,
                                     has_vision = true,
-                                    has_function_calling = true,
+                                    can_use_tools = true,
                                 },
                             },
                             ["gpt-5.4-mini"] = {
                                 formatted_name = "02. GPT 5.4 Mini",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5.6-luna"] = {
                                 formatted_name = "03. GPT 5.6 Luna",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5.3-codex"] = {
                                 formatted_name = "04. GPT 5.3 Codex",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5.6-terra"] = {
                                 formatted_name = "05. GPT 5.6 Terra",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5.6-sol"] = {
                                 formatted_name = "06. GPT 5.6 Sol",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5.1-codex"] = {
                                 formatted_name = "07. GPT 5.1 Codex",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5"] = {
                                 formatted_name = "08. GPT 5",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                             ["gpt-5-mini"] = {
                                 formatted_name = "09. GPT 5 Mini",
                                 opts = {
                                     can_reason = false,
                                     has_vision = false,
-                                    has_function_calling = true,
+                                    can_use_tools = true,
                                 },
                             },
                             ["gpt-5.4-pro"] = {
                                 formatted_name = "10. GPT 5.4 Pro",
-                                opts = { can_reason = true, has_vision = true, has_function_calling = true },
+                                opts = { can_reason = true, has_vision = true, can_use_tools = true },
                             },
                         }
                         return adapter
@@ -2193,6 +2194,15 @@ require("lazy").setup({
                         name = "openai_responses_custom",
                         model = "gpt-5.4-nano",
                     },
+                    tools = {
+                        ["run_command"] = {
+                            opts = {
+                                allowed_in_yolo_mode = true,
+                                require_approval_before = true,
+                                require_cmd_approval = false,
+                            },
+                        },
+                    },
                 },
                 inline = {
                     adapter = {
@@ -2204,6 +2214,28 @@ require("lazy").setup({
                     adapter = {
                         name = "openai_responses_custom",
                         model = "gpt-5.4-nano",
+                    },
+                },
+            },
+            rules = {
+                opts = {
+                    -- show_presets = false,
+                    chat = { autoload = "custom" },
+                },
+                custom = {
+                    description = "My rules",
+                    files = {
+                        ".clinerules",
+                        ".cursorrules",
+                        ".goosehints",
+                        ".rules",
+                        ".windsurfrules",
+                        ".github/copilot-instructions.md",
+                        "AGENT.md",
+                        { path = "AGENTS.md", parser = "claude" },
+                        { path = "CLAUDE.md", parser = "claude" },
+                        { path = "CLAUDE.local.md", parser = "claude" },
+                        { path = "~/.claude/CLAUDE.md", parser = "claude" },
                     },
                 },
             },
