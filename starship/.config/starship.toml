@@ -135,7 +135,7 @@ disabled = true
 [ruby]
 disabled = true
 
-[C]
+[c]
 disabled = false
 symbol = "C "
 format = "[$symbol]($style)"
